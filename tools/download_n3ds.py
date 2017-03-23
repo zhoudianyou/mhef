@@ -23,7 +23,7 @@ except ImportError:
 
 
 parser = argparse.ArgumentParser(description='Downloads a file from the Monster Hunter 4 Ultimate DLC website')
-parser.add_argument('game', choices=('4G', 'X', 'SS'), help='game version')
+parser.add_argument('game', choices=('4G', 'X', 'SS','XX'), help='game version')
 parser.add_argument('region', choices=('JPN', 'USA', 'EUR', 'KOR', 'TWN'), help='game region')
 parser.add_argument('remotefile', help='remote file to download')
 parser.add_argument('outputfile', help='output file')
@@ -50,7 +50,9 @@ elif args.game == 'X':
 elif args.game == 'SS':
     uri = 'http://voodoo.capcom.co.jp/3ds/mhss_jp/{}'.format(args.remotefile)
     headers = {'User-Agent': 'Capcom Browser Services for MonsterHunter_SS'}
-
+elif args.game == 'XX' :
+    uri = 'http://meteor.capcom.co.jp/3ds/mhxx_jp/{}'.format(args.remotefile)
+    headers = {'User-Agent': 'Capcom Browser Services for MonsterHunter_XX'}
 request = Request(uri, headers=headers)
 response = urlopen(request)
 open(args.outputfile, 'wb').write(response.read())
